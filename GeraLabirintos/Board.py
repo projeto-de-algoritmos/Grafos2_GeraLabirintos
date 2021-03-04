@@ -51,7 +51,7 @@ class Board():
             for column in range(self.vertical):
                 draw.rect(screen,
                           self.grid[row][column],
-                          [(self.margin + self.width) * column + self.margin,
-                          (self.margin + self.height) * row + self.margin,
+                          [(self.margin + self.width) * (2 + column) + self.margin,
+                          (self.margin + self.height) * (2 + row) + self.margin,
                           self.width,
                           self.height])
