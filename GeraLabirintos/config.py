@@ -1,5 +1,8 @@
 import pygame
-from colors import BLACK
+from colors import BLACK, STANDARD_COLOR
+
+# Classes
+from Board import Board
 
 pygame.init()
 
@@ -12,3 +15,6 @@ pygame.display.set_caption("Gera Labirintos")
 
 # Create an object to help track time
 clock = pygame.time.Clock()
+
+# Objects
+board = Board(25, 25, 15, 15, 5, STANDARD_COLOR)
