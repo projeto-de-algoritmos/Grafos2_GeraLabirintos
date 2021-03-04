@@ -1,4 +1,4 @@
-from pygame import QUIT, MOUSEBUTTONDOWN, MOUSEBUTTONUP
+from pygame import QUIT
 
 def treats_event(event) -> bool:
     """treats pygame events
