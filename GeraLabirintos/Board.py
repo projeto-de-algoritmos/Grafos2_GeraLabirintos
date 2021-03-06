@@ -1,4 +1,7 @@
 from pygame import draw, Surface
+from colors import BLACK, WALL
+from random import randint
+import random
 
 class Board():
     def __init__(self, width: int, height: int, horizontal: int, vertical: int, margin: int, standard_color: tuple) -> None:
@@ -24,7 +27,7 @@ class Board():
                         True (bool):  is out of range
                         False (bool): is in range
         """
-        return (x < 0 or y < 0 or x >= self.width or y >= self.height)
+        return (x < 0 or y < 0 or x >= self.horizontal or y >= self.vertical)
 
     def screen_to_grid(self, x: int, y: int) -> tuple:
         """Change the x/y screen coordinates to grid coordinates
@@ -55,3 +58,60 @@ class Board():
                           (self.margin + self.height) * (2 + row) + self.margin,
                           self.width,
                           self.height])
+
+    def maze_prim(self, x: int, y: int, screen: Surface) -> None:
+        """draw maze in the screen based on prim's algorithm
+
+                Parameters:
+                        x (int): x screen coordinates
+                        y (int): y screen coordinates
+                        screen (Surface): game screen
+
+                Returns:
+                        None
+        """
+        check = [[False for i in range(self.vertical)] for j in range(self.horizontal)]
+
+        vetX = []
+        vetY = []
+        vetNX = []
+        vetNY = []
+
+        n = 0
+        vetX.append(x)
+        vetY.append(y)
+
+        vetNX.append(0)
+        vetNY.append(0)
+
+        while vetX:
+
+                n = randint(0, len(vetX) - 1)
+
+                if self.out_of_range(vetX[n], vetY[n]) or check[vetX[n]][vetY[n]] == True:
+                        vetX.pop(n)
+                        vetY.pop(n)
+                        vetNX.pop(n)
+                        vetNY.pop(n)
+                        continue
+
+                draw.rect(screen, WALL,
+                ((self.margin + self.width) * (2.35 + vetY[n]) + self.margin,
+                 (self.margin + self.height) * (2.35 + vetX[n]) + self.margin,
+                  13, 13))
+
+                draw.rect(screen, WALL,
+                ((self.margin + self.width) * (2.35 + vetY[n] + (vetNY[n] / 2)) + self.margin,
+                 (self.margin + self.height) * (2.35 + vetX[n] + (vetNX[n] / 2)) + self.margin,
+                  13, 13))
+
+                check[vetX[n]][vetY[n]] = True
+                
+                for i in range(0, 4):
+                        newX = vetX[n]+self.dx[i]
+                        newY = vetY[n]+self.dy[i]
+                        if not (self.out_of_range(newX, newY) or check[newX][newY] == True):
+                                vetX.append(newX)
+                                vetY.append(newY)
+                                vetNX.append(self.dx[i])
+                                vetNY.append(self.dy[i])
