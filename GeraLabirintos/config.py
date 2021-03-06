@@ -17,4 +17,4 @@ pygame.display.set_caption("Gera Labirintos")
 clock = pygame.time.Clock()
 
 # Objects
-board = Board(25, 25, 28, 50, 0, STANDARD_COLOR)
+board = Board(25, 25, 40, 50, 0, STANDARD_COLOR)

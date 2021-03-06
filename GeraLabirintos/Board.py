@@ -54,8 +54,8 @@ class Board():
             for column in range(self.vertical):
                 draw.rect(screen,
                           self.grid[row][column],
-                          [(self.margin + self.width) * (2 + column) + self.margin,
-                          (self.margin + self.height) * (2 + row) + self.margin,
+                          [(self.margin + self.width) * (column) + self.margin,
+                          (self.margin + self.height) * (row) + self.margin,
                           self.width,
                           self.height])
 
@@ -95,15 +95,13 @@ class Board():
                         vetNY.pop(n)
                         continue
 
-                draw.rect(screen, WALL,
-                ((self.margin + self.width) * (2.35 + vetY[n]) + self.margin,
-                 (self.margin + self.height) * (2.35 + vetX[n]) + self.margin,
-                  13, 13))
+                posX = (self.margin + self.width) * (vetY[n]) + self.margin
+                posY = (self.margin + self.height) * (vetX[n]) + self.margin
+                draw.rect(screen, WALL, (posX, posY, 13, 13))
 
-                draw.rect(screen, WALL,
-                ((self.margin + self.width) * (2.35 + vetY[n] + (vetNY[n] / 2)) + self.margin,
-                 (self.margin + self.height) * (2.35 + vetX[n] + (vetNX[n] / 2)) + self.margin,
-                  13, 13))
+                posX = (self.margin + self.width) * (vetY[n] + vetNY[n]/2) + self.margin
+                posY = (self.margin + self.height) * (vetX[n] + vetNX[n]/2) + self.margin
+                draw.rect(screen, WALL, (posX, posY, 13, 13))
 
                 check[vetX[n]][vetY[n]] = True
                 
