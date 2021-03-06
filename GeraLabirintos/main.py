@@ -6,8 +6,10 @@ from events import treats_event
 from config import screen, clock, board
 done = False
 
+board.draw_grid(screen)
+board.maze_prim(1, 1, screen)
+
 while not done:
-    board.draw_grid(screen)
     # Frame rate
     clock.tick(60)
     # Update screen
