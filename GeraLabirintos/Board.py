@@ -1,7 +1,6 @@
 from pygame import draw, Surface
 from colors import BLACK, WALL
 from random import randint
-import random
 
 class Board():
     def __init__(self, width: int, height: int, horizontal: int, vertical: int, margin: int, standard_color: tuple) -> None:
@@ -28,18 +27,6 @@ class Board():
                         False (bool): is in range
         """
         return (x < 0 or y < 0 or x >= self.horizontal or y >= self.vertical)
-
-    def screen_to_grid(self, x: int, y: int) -> tuple:
-        """Change the x/y screen coordinates to grid coordinates
-
-                Parameters:
-                        x (int): x screen coordinates
-                        y (int): y screen coordinates
-
-                Returns:
-                        (x, y) (tuple): grid coordinates
-        """
-        return (y // (self.width + self.margin), x // (self.height + self.margin))
 
     def draw_grid(self, screen: Surface) -> None:
         """draw grid to specific screen
@@ -71,16 +58,14 @@ class Board():
                         None
         """
         check = [[False for i in range(self.vertical)] for j in range(self.horizontal)]
-
         vetX = []
         vetY = []
+        # neighbors
         vetNX = []
         vetNY = []
 
-        n = 0
         vetX.append(x)
         vetY.append(y)
-
         vetNX.append(0)
         vetNY.append(0)
 
