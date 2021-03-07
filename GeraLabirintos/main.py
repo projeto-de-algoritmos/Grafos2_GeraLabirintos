@@ -2,14 +2,15 @@
 import pygame
 # Functions
 from events import treats_event
+from buttonsHelper import draw_buttons
 # Global constants and variables
-from config import screen, clock, board
-done = False
+from config import screen, clock, buttons, board
 
 board.draw_grid(screen)
-board.maze_prim(1, 1, screen)
 
+done = False
 while not done:
+    draw_buttons()
     # Frame rate
     clock.tick(60)
     # Update screen
