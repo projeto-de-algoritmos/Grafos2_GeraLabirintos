@@ -1,7 +1,6 @@
 from pygame import draw, Surface
 from colors import BLACK, WALL
 from random import randint
-import random
 
 class Board():
     def __init__(self, width: int, height: int, horizontal: int, vertical: int, margin: int, standard_color: tuple) -> None:
@@ -29,18 +28,6 @@ class Board():
         """
         return (x < 0 or y < 0 or x >= self.horizontal or y >= self.vertical)
 
-    def screen_to_grid(self, x: int, y: int) -> tuple:
-        """Change the x/y screen coordinates to grid coordinates
-
-                Parameters:
-                        x (int): x screen coordinates
-                        y (int): y screen coordinates
-
-                Returns:
-                        (x, y) (tuple): grid coordinates
-        """
-        return (y // (self.width + self.margin), x // (self.height + self.margin))
-
     def draw_grid(self, screen: Surface) -> None:
         """draw grid to specific screen
 
@@ -54,8 +41,8 @@ class Board():
             for column in range(self.vertical):
                 draw.rect(screen,
                           self.grid[row][column],
-                          [(self.margin + self.width) * (2 + column) + self.margin,
-                          (self.margin + self.height) * (2 + row) + self.margin,
+                          [(self.margin + self.width) * (column) + self.margin,
+                          (self.margin + self.height) * (row) + self.margin,
                           self.width,
                           self.height])
 
@@ -71,16 +58,14 @@ class Board():
                         None
         """
         check = [[False for i in range(self.vertical)] for j in range(self.horizontal)]
-
         vetX = []
         vetY = []
+        # neighbors
         vetNX = []
         vetNY = []
 
-        n = 0
         vetX.append(x)
         vetY.append(y)
-
         vetNX.append(0)
         vetNY.append(0)
 
@@ -95,15 +80,13 @@ class Board():
                         vetNY.pop(n)
                         continue
 
-                draw.rect(screen, WALL,
-                ((self.margin + self.width) * (2.35 + vetY[n]) + self.margin,
-                 (self.margin + self.height) * (2.35 + vetX[n]) + self.margin,
-                  13, 13))
+                posX = (self.margin + self.width) * (vetY[n]) + self.margin
+                posY = (self.margin + self.height) * (vetX[n]) + self.margin
+                draw.rect(screen, WALL, (posX, posY, 13, 13))
 
-                draw.rect(screen, WALL,
-                ((self.margin + self.width) * (2.35 + vetY[n] + (vetNY[n] / 2)) + self.margin,
-                 (self.margin + self.height) * (2.35 + vetX[n] + (vetNX[n] / 2)) + self.margin,
-                  13, 13))
+                posX = (self.margin + self.width) * (vetY[n] + vetNY[n]/2) + self.margin
+                posY = (self.margin + self.height) * (vetX[n] + vetNX[n]/2) + self.margin
+                draw.rect(screen, WALL, (posX, posY, 13, 13))
 
                 check[vetX[n]][vetY[n]] = True
                 
