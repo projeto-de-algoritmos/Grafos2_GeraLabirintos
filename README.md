@@ -11,22 +11,42 @@
 | 18/0030264  |  Antonio Igor Carvalho |
 
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+
+O objetivo do projeto era de criar um gerador de labirintos aleatório utilizando
+o algoritmo Prim. Desse modo, fizemos algumas alterações no algoritmo princiapl,
+para que atendesse nosso objetivo. Ao invés de remover a célula com menor peso,
+nós aleatoriamente conectávamos um dos vizinhos.
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
 
-## Instalação 
-**Linguagem**: xxxxxx<br>
-**Framework**: (caso exista)<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
+<div align="center">
+  <img src= "./images/image1.png"/>
+</div>
 
-## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
+<div align="center">
+  <img src= "./images/image2.png"/>
+</div>
 
-## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
+<div align="center">
+  <img src= "./images/image3.png"/>
+</div>
 
+<div align="center">
+  <img src= "./images/image4.png"/>
+</div>
 
+## Instalação
 
+**Linguagem**: python3 <br>
+**Biblioteca**: python3-pygame <br>
 
+O único pré requisito é ter o interpretador python3 instalado e a biblioteca pygame.
+
+```
+$ git clone https://github.com/projeto-de-algoritmos/Grafos2_GeraLabirintos.git
+$ python3 Grafos2_GeraLabirintos/GeraLabirintos/main.py
+```
+
+## Uso
+
+Clicar no botão "Maze" e ir gerando labirintos aleatórios.
